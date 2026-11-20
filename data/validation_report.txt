@@ -1,0 +1,40 @@
+======================================================================
+DATASET VALIDATION REPORT — CHANNEL WISE MARKETING PERFORMANCE
+======================================================================
+Validation Timestamp: 2026-11-20T12:03:30.500567
+Database Target: C:\HCL_Project\data\app.db
+
+1. ENTITY ROW COUNTS:
+  - dim_channel:                     5 rows (Target: 5)
+  - dim_campaign:                    25 rows (Target: 25-30)
+  - dim_customer:                    150 rows (Target: 100-150)
+  - fact_daily_campaign_performance: 262 rows (Target: 150-300)
+  - fact_customer_touchpoint:        450 rows (Target: 400-500)
+  - vw_marketing_analysis:           262 rows (38 unified columns)
+
+2. REFERENTIAL INTEGRITY & SCHEMA INVARIANTS:
+  - PRAGMA foreign_key_check:        0 violations (PASS: 100% Valid FKs)
+  - Clicks <= Impressions check:     0 violations (PASS)
+  - Conversions <= Clicks check:     0 violations (PASS)
+  - Spend/Revenue >= 0 check:        0 violations (PASS)
+
+3. INTENTIONAL DATA QUALITY INJECTIONS (FOR CLEANING / STEP 15):
+  - Missing UTM parameters count:    7 records (2.7% missing rate)
+  - Statistical outlier spikes:      3 records (Spend/Revenue Z > 3.0)
+  - Duplicate log rows inserted:     2 records (Identified for deduplication testing)
+
+4. BUILT-IN PATTERN CONFIRMATION:
+  A. Channel ROAS & CAC Performance Disparity (Pattern 1):
+     * Organic Search         | ROAS: 106.91x | CAC: ₹   30.56
+     * Email Marketing        | ROAS: 33.99x | CAC: ₹   94.75
+     * Google Ads             | ROAS:  3.15x | CAC: ₹  923.15
+     * Meta Ads               | ROAS:  2.04x | CAC: ₹ 1106.37
+     * Influencer Marketing   | ROAS:  0.89x | CAC: ₹ 2937.70
+
+  B. Weekend Conversion Surge (Pattern 2):
+     * Weekday (Mon-Thu)      | Avg CVR: 2.83% | Avg AOV: ₹2714.22
+     * Weekend (Fri-Sun)      | Avg CVR: 3.80% | Avg AOV: ₹2968.30
+
+======================================================================
+FINAL VERDICT: ALL VALIDATION CHECKS PASSED (100% AUDIT READY)
+======================================================================

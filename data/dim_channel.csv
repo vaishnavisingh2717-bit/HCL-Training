@@ -1,0 +1,6 @@
+channel_id,channel_name,channel_category,default_cpc_benchmark,benchmark_roas,benchmark_cac
+1,Google Ads,Paid Search,32.5,2.2,1400.0
+2,Meta Ads,Paid Social,24.0,2.0,1500.0
+3,Email Marketing,Owned / Direct,4.5,3.5,450.0
+4,Organic Search,Organic SEO,1.0,4.0,350.0
+5,Influencer Marketing,Partnerships,48.0,1.8,1800.0
