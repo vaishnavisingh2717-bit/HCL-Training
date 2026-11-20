@@ -25,6 +25,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="Data Health & Export | Marketing Analytics", page_icon="🛡️", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Data Quality Governance, Anomaly Logs & Export",
         subtitle="Verification of relational integrity, null imputation, IQR anomaly boundaries, and compliant data export.",

@@ -32,6 +32,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="Channel Deep Dive | Marketing Analytics", page_icon="📊", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Channel Deep Dive & Campaign Performance Matrix",
         subtitle="Granular evaluation of acquisition channels, campaign unit economics, and efficiency quadrants.",
@@ -86,13 +87,13 @@ def main():
             color="channel_name",
             hover_name="campaign_name",
             labels={"cac": "Customer Acquisition Cost (₹)", "roas": "Return on Ad Spend (ROAS)", "spend": "Total Spend"},
-            title="Campaign Efficiency Quadrants (Size = Total Ad Spend)",
             color_discrete_sequence=["#1E3A8A", "#2563EB", "#0D9488", "#F59E0B", "#EF4444"]
         )
         
-        # Add benchmark threshold lines
-        fig_scatter.add_hline(y=2.0, line_dash="dash", line_color="#EF4444", annotation_text="Target ROAS (2.0x)")
-        fig_scatter.add_vline(x=1500.0, line_dash="dash", line_color="#EF4444", annotation_text="Max Acceptable CAC (₹1,500)")
+        # Add benchmark threshold lines with clear non-overlapping annotations
+        fig_scatter.add_hline(y=2.0, line_dash="dash", line_color="#EF4444", annotation_text="Target ROAS (2.0x)", annotation_position="top left")
+        fig_scatter.add_vline(x=1500.0, line_dash="dash", line_color="#EF4444", annotation_text="Max Acceptable CAC (₹1,500)", annotation_position="top right")
+        fig_scatter.update_layout(height=420)
         
         ui.apply_plotly_theme(fig_scatter)
         st.plotly_chart(fig_scatter, use_container_width=True)

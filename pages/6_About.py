@@ -23,6 +23,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="About & Architecture | Marketing Analytics", page_icon="ℹ️", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Project Architecture, Governance & Academic Metadata",
         subtitle="Comprehensive system architecture, relational ER diagram, academic credentials, and compliance matrix.",
@@ -70,7 +71,7 @@ def main():
     st.subheader("Relational Database Schema (Star Schema)")
     er_image_path = ROOT_DIR / "docs" / "09_ER_Diagram.png"
     if er_image_path.exists():
-        st.image(str(er_image_path), caption="Entity-Relationship Diagram: Star Schema with Fact & Dimension Tables", use_column_width=True)
+        st.image(str(er_image_path), caption="Entity-Relationship Diagram: Star Schema with Fact & Dimension Tables", use_container_width=True)
     else:
         st.info("ER diagram image available in docs/09_ER_Diagram.png")
 

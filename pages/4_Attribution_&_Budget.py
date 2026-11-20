@@ -34,6 +34,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="Attribution & Budget | Marketing Analytics", page_icon="⚖️", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Multi-Touch Attribution & Algorithmic Capital Simulator",
         subtitle="Comparing First-Touch, Last-Touch, and Linear models alongside capital reallocation simulation.",
@@ -72,10 +73,9 @@ def main():
             y="Conversions",
             color="Model",
             barmode="group",
-            color_discrete_sequence=["#2563EB", "#0D9488", "#F59E0B"],
-            title="Credited Conversions by Attribution Model"
+            color_discrete_sequence=["#2563EB", "#0D9488", "#F59E0B"]
         )
-        fig_attr.update_layout(height=360)
+        fig_attr.update_layout(height=380)
         ui.apply_plotly_theme(fig_attr)
         st.plotly_chart(fig_attr, use_container_width=True)
 

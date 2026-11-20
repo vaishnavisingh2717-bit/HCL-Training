@@ -32,6 +32,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="Statistical Inference | Marketing Analytics", page_icon="📐", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Advanced Statistical Inference & Econometric Modeling",
         subtitle="Rigorous mathematical hypothesis testing, two-sample Z-tests, OLS regression, and correlation matrices.",
@@ -103,12 +104,17 @@ def main():
             corr_df = pd.DataFrame(corr_dict)
             fig_corr = px.imshow(
                 corr_df,
-                text_auto=True,
+                text_auto=".2f",
                 aspect="auto",
                 color_continuous_scale="Blues",
                 labels=dict(color="Correlation")
             )
-            fig_corr.update_layout(height=350)
+            fig_corr.update_layout(
+                height=380,
+                margin=dict(l=50, r=20, t=30, b=60)
+            )
+            fig_corr.update_xaxes(tickangle=-35, tickfont=dict(size=10))
+            fig_corr.update_yaxes(tickfont=dict(size=10))
             ui.apply_plotly_theme(fig_corr)
             st.plotly_chart(fig_corr, use_container_width=True)
 

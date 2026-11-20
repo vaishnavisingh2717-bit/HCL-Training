@@ -30,6 +30,7 @@ def main():
     if HAS_STREAMLIT:
         st.set_page_config(page_title="Customer Cohorts | Marketing Analytics", page_icon="👥", layout="wide")
 
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Customer Cohort & Demographic Behavioral Analytics",
         subtitle="Segmentation analysis across customer value tiers, journey touchpoints, and regional demographic clusters.",

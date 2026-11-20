@@ -92,6 +92,7 @@ def main():
     filtered_df = render_sidebar(cleaned_df)
 
     # 3. Header Banner
+    ui.inject_global_css()
     ui.render_tailwind_header(
         title="Channel Wise Marketing Performance Intelligence",
         subtitle="Consolidated cross-channel acquisition telemetry, spend efficiency, and capital attribution.",
@@ -125,7 +126,7 @@ def main():
             fig = go.Figure()
             fig.add_trace(go.Bar(x=daily["date"], y=daily["spend"], name="Ad Spend (₹)", marker_color="#94A3B8"))
             fig.add_trace(go.Scatter(x=daily["date"], y=daily["revenue"], name="Revenue (₹)", mode="lines+markers", line=dict(color="#1E3A8A", width=3)))
-            fig.update_layout(title="Daily Ad Spend vs Generated Revenue", barmode="group", height=350)
+            fig.update_layout(barmode="group", height=360)
             ui.apply_plotly_theme(fig)
             st.plotly_chart(fig, use_container_width=True)
         else:
@@ -142,7 +143,7 @@ def main():
                 hole=0.45,
                 color_discrete_sequence=["#1E3A8A", "#2563EB", "#0D9488", "#F59E0B", "#EF4444"]
             )
-            fig_pie.update_layout(title="Revenue Distribution by Channel", height=350)
+            fig_pie.update_layout(height=360, margin=dict(l=20, r=20, t=20, b=20))
             ui.apply_plotly_theme(fig_pie)
             st.plotly_chart(fig_pie, use_container_width=True)
 
