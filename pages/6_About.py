@@ -41,7 +41,9 @@ def main():
     with col1:
         st.markdown("""
         **Learner:** Vaishnavi Singh  
-        **Roll Number:** `2503201450157`  
+        **Roll Number:** `2500320140160`  
+        **Batch ID:** ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01  
+        **Project ID:** P084  
         **Program:** Master of Computer Applications (MCA) – 2nd Year  
         **Specialization:** Data Analytics  
         **Institution:** ABES Engineering College, Ghaziabad  
@@ -50,9 +52,9 @@ def main():
 
     with col2:
         st.markdown("""
-        **Project Mentor:** Prof. Kalpana Dwivedi  
+        **Project Mentor:** Mr. Dinesh (Data Analytics)  
         **Department:** Department of Computer Applications  
-        **Project Title:** Channel Wise Marketing Performance Analysis  
+        **Project Title:** Channel Wise Marketing Performance Analysis (P084)  
         **Technology Stack:** Python 3.12, Streamlit Multipage, SQLite 3, Plotly, Tailwind CSS, Pytest  
         **Version:** 1.0 (Production Master)
         """)

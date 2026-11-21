@@ -14,7 +14,7 @@ from pptx.enum.shapes import MSO_SHAPE
 
 WORKSPACE_DIR = r"c:\HCL_Project"
 DOCS_DIR = os.path.join(WORKSPACE_DIR, "docs")
-TARGET_PPTX = os.path.join(DOCS_DIR, "2503201450157_Presentation.pptx")
+TARGET_PPTX = os.path.join(DOCS_DIR, "2500320140160_VaishnaviSingh_Presentation.pptx")
 
 # Defined Color Palette
 COLOR_RED = RGBColor(0xA5, 0x1C, 0x30)
@@ -213,27 +213,27 @@ def build_presentation():
     tf_lines.vertical_anchor = MSO_ANCHOR.TOP
 
     p0 = tf_lines.paragraphs[0]
-    p0.text = "Vaishnavi Singh | Roll No 2503201450157"
+    p0.text = "Vaishnavi Singh | Roll No 2500320140160 | Batch ID: ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01"
     p0.font.name = "Calibri"
-    p0.font.size = Pt(15)
+    p0.font.size = Pt(14)
     p0.font.color.rgb = COLOR_CARD
     p0.space_before = Pt(4)
 
     p1 = tf_lines.add_paragraph()
-    p1.text = "MCA 2nd Year Data Analyst | Mentor: Prof. Kalpana Dwivedi"
+    p1.text = "Project ID: P084 | Mentor: Mr. Dinesh (Data Analytics)"
     p1.font.name = "Calibri"
-    p1.font.size = Pt(15)
+    p1.font.size = Pt(14)
     p1.font.color.rgb = COLOR_CARD
     p1.space_before = Pt(4)
 
     p2 = tf_lines.add_paragraph()
-    p2.text = "20 November 2026"
+    p2.text = "21 November 2026"
     p2.font.name = "Calibri"
-    p2.font.size = Pt(15)
+    p2.font.size = Pt(14)
     p2.font.color.rgb = COLOR_PINK
     p2.space_before = Pt(4)
 
-    set_speaker_note(s1, "Good morning esteemed mentors and evaluators. I am Vaishnavi Singh, MCA 2nd Year Data Analytics scholar at ABES Engineering College. Today, I am presenting my capstone project: Channel Wise Marketing Performance Analysis, developed under the mentorship of Prof. Kalpana Dwivedi. The purpose of this project is to eliminate marketing spend waste across fragmented digital channels using relational warehousing, statistical inference, and attribution modeling.")
+    set_speaker_note(s1, "Good morning esteemed mentors and evaluators. I am Vaishnavi Singh (Roll No 2500320140160), MCA 2nd Year Data Analytics scholar at ABES Engineering College. Today, I am presenting my capstone project P084: Channel Wise Marketing Performance Analysis, developed under the mentorship of Mr. Dinesh. The purpose of this project is to eliminate marketing spend waste across fragmented digital channels using relational warehousing, statistical inference, and attribution modeling.")
 
     # ==================== SLIDE 2: PROBLEM AND HOW MIGHT WE ====================
     s2 = create_blank_slide(prs)
@@ -682,14 +682,6 @@ def build_presentation():
     # Save presentation
     prs.save(TARGET_PPTX)
     print(f"Master presentation saved to: {TARGET_PPTX}")
-
-    # Mirror copies
-    p1 = os.path.join(DOCS_DIR, "CWMP_Presentation.pptx")
-    p2 = os.path.join(DOCS_DIR, "18_Presentation_Deck.pptx")
-    shutil.copyfile(TARGET_PPTX, p1)
-    shutil.copyfile(TARGET_PPTX, p2)
-    print(f"Mirrored copy saved to: {p1}")
-    print(f"Mirrored copy saved to: {p2}")
 
 if __name__ == "__main__":
     build_presentation()

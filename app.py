@@ -47,7 +47,7 @@ def render_sidebar(df):
 
     st.sidebar.image("https://img.icons8.com/fluency/96/combo-chart.png", width=64)
     st.sidebar.title("Telemetry Controls")
-    st.sidebar.markdown("**Project:** Channel Marketing Analytics  \n**Author:** Vaishnavi Singh (`2503201450157`)")
+    st.sidebar.markdown("**Project:** Channel Marketing Analytics (P084)  \n**Author:** Vaishnavi Singh (`2500320140160`)  \n**Mentor:** Mr. Dinesh")
     st.sidebar.markdown("---")
 
     channels = sorted(list(set(df["channel_name"]))) if "channel_name" in df.columns else []

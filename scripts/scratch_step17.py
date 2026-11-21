@@ -15,7 +15,7 @@ from docx.oxml.ns import nsdecls, qn
 
 WORKSPACE_DIR = r"c:\HCL_Project"
 DOCS_DIR = os.path.join(WORKSPACE_DIR, "docs")
-TARGET_DOCX = os.path.join(DOCS_DIR, "2503201450157_Project_Document.docx")
+TARGET_DOCX = os.path.join(DOCS_DIR, "2500320140160_VaishnaviSingh_Project_Report.docx")
 
 def set_cell_background(cell, hex_color):
     tcPr = cell._tc.get_or_add_tcPr()
@@ -190,7 +190,7 @@ def generate_document():
         header_p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         header_p.paragraph_format.space_before = Pt(0)
         header_p.paragraph_format.space_after = Pt(0)
-        header_run = header_p.add_run("ABES Engineering College | Project Document | CWMP-2026")
+        header_run = header_p.add_run("ABES Engineering College | Project Report | P084")
         header_run.font.name = "Calibri"
         header_run.font.size = Pt(8)
         header_run.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
@@ -201,7 +201,7 @@ def generate_document():
         footer_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         footer_p.paragraph_format.space_before = Pt(0)
         footer_p.paragraph_format.space_after = Pt(0)
-        footer_run1 = footer_p.add_run("Vaishnavi Singh | 2503201450157     Page ")
+        footer_run1 = footer_p.add_run("Vaishnavi Singh | 2500320140160     Page ")
         footer_run1.font.name = "Calibri"
         footer_run1.font.size = Pt(8)
         footer_run1.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
@@ -217,67 +217,157 @@ def generate_document():
     normal_style.paragraph_format.space_before = Pt(0)
     normal_style.paragraph_format.space_after = Pt(0)
 
-    # ==================== PAGE 1 COVER ====================
+    # ==================== PAGE 1 COVER (Exact Format from Image) ====================
+    # 1. College Logo
+    logo_path = os.path.join(DOCS_DIR, "abes_logo.jpg")
+    if os.path.exists(logo_path):
+        p_logo = doc.add_paragraph()
+        p_logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_logo.paragraph_format.space_before = Pt(0)
+        p_logo.paragraph_format.space_after = Pt(2)
+        r_pic = p_logo.add_run()
+        r_pic.add_picture(logo_path, width=Inches(1.15))
+
+    # 2. Institution Details
     p_inst = doc.add_paragraph()
-    p_inst.paragraph_format.space_after = Pt(5)
-    r_inst = p_inst.add_run("HCLTech Career Shaper Programme | ABES Engineering College, Ghaziabad")
-    r_inst.font.name = "Calibri"
-    r_inst.font.size = Pt(10)
+    p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_inst.paragraph_format.space_before = Pt(2)
+    p_inst.paragraph_format.space_after = Pt(1)
+    r_inst = p_inst.add_run("ABES ENGINEERING COLLEGE")
+    r_inst.font.name = "Georgia"
+    r_inst.font.size = Pt(15)
     r_inst.font.bold = True
-    r_inst.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30)
+    r_inst.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
-    p_logo = doc.add_paragraph()
-    p_logo.paragraph_format.space_after = Pt(5)
-    r_logo = p_logo.add_run("[Insert ABES logo here]")
-    r_logo.font.name = "Calibri"
-    r_logo.font.size = Pt(9)
-    r_logo.font.italic = True
-    r_logo.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
+    p_city = doc.add_paragraph()
+    p_city.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_city.paragraph_format.space_before = Pt(0)
+    p_city.paragraph_format.space_after = Pt(1)
+    r_city = p_city.add_run("Ghaziabad, Uttar Pradesh")
+    r_city.font.name = "Calibri"
+    r_city.font.size = Pt(10.5)
+    r_city.font.bold = True
+    r_city.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
 
-    p_doc = doc.add_paragraph()
-    p_doc.paragraph_format.space_before = Pt(70)
-    p_doc.paragraph_format.space_after = Pt(6)
-    r_doc = p_doc.add_run("PROJECT DOCUMENT")
-    r_doc.font.name = "Georgia"
-    r_doc.font.size = Pt(26)
-    r_doc.font.bold = True
-    r_doc.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
+    p_aff = doc.add_paragraph()
+    p_aff.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_aff.paragraph_format.space_before = Pt(0)
+    p_aff.paragraph_format.space_after = Pt(12)
+    r_aff = p_aff.add_run("Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Uttar Pradesh")
+    r_aff.font.name = "Calibri"
+    r_aff.font.size = Pt(9.0)
+    r_aff.font.color.rgb = RGBColor(0x66, 0x66, 0x66)
 
-    p_title = doc.add_paragraph()
-    p_title.paragraph_format.space_after = Pt(12)
-    pBdr = parse_xml(r'<w:pBdr %s><w:bottom w:val="single" w:sz="12" w:space="4" w:color="A51C30"/></w:pBdr>' % nsdecls('w'))
-    p_title._p.get_or_add_pPr().append(pBdr)
-    r_title = p_title.add_run("CWMP-2026 - Channel Wise Marketing Performance Analysis")
-    r_title.font.name = "Georgia"
-    r_title.font.size = Pt(18)
-    r_title.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30)
+    # 3. Report Title
+    p_rep = doc.add_paragraph()
+    p_rep.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_rep.paragraph_format.space_before = Pt(4)
+    p_rep.paragraph_format.space_after = Pt(2)
+    r_rep = p_rep.add_run("PROJECT REPORT")
+    r_rep.font.name = "Georgia"
+    r_rep.font.size = Pt(20)
+    r_rep.font.bold = True
+    r_rep.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
-    p_sub = doc.add_paragraph()
-    p_sub.paragraph_format.space_after = Pt(24)
-    r_sub = p_sub.add_run("Description · HMW · Stakeholders · Traceability · User Stories · BRD · TRD · Database Design · Test Cases · UI Framework")
-    r_sub.font.name = "Calibri"
-    r_sub.font.size = Pt(10)
-    r_sub.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
+    p_on = doc.add_paragraph()
+    p_on.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_on.paragraph_format.space_before = Pt(0)
+    p_on.paragraph_format.space_after = Pt(2)
+    r_on = p_on.add_run("on")
+    r_on.font.name = "Calibri"
+    r_on.font.size = Pt(11)
+    r_on.font.italic = True
+    r_on.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
 
-    # Cover Table: Field width 2900 | Details width 6738 (Total 9638 dxa)
+    p_proj = doc.add_paragraph()
+    p_proj.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_proj.paragraph_format.space_before = Pt(0)
+    p_proj.paragraph_format.space_after = Pt(2)
+    r_proj = p_proj.add_run("Channel Wise Marketing Performance Analysis")
+    r_proj.font.name = "Georgia"
+    r_proj.font.size = Pt(16)
+    r_proj.font.bold = True
+    r_proj.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30) # Burgundy
+
+    p_pid = doc.add_paragraph()
+    p_pid.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_pid.paragraph_format.space_before = Pt(0)
+    p_pid.paragraph_format.space_after = Pt(12)
+    r_pid = p_pid.add_run("Project ID: P084  |  A Multi-Touch Telemetry & Capital Attribution System")
+    r_pid.font.name = "Calibri"
+    r_pid.font.size = Pt(9.5)
+    r_pid.font.bold = True
+    r_pid.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+
+    # 4. Fulfilment Text
+    p_subm = doc.add_paragraph()
+    p_subm.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_subm.paragraph_format.space_before = Pt(2)
+    p_subm.paragraph_format.space_after = Pt(2)
+    r_subm = p_subm.add_run("Submitted in partial fulfilment of the requirements for the degree of")
+    r_subm.font.name = "Calibri"
+    r_subm.font.size = Pt(10)
+    r_subm.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
+
+    p_deg = doc.add_paragraph()
+    p_deg.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_deg.paragraph_format.space_before = Pt(0)
+    p_deg.paragraph_format.space_after = Pt(1)
+    r_deg = p_deg.add_run("Master of Computer Applications")
+    r_deg.font.name = "Calibri"
+    r_deg.font.size = Pt(12.5)
+    r_deg.font.bold = True
+    r_deg.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
+
+    p_in = doc.add_paragraph()
+    p_in.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_in.paragraph_format.space_before = Pt(0)
+    p_in.paragraph_format.space_after = Pt(1)
+    r_in = p_in.add_run("in")
+    r_in.font.name = "Calibri"
+    r_in.font.size = Pt(10)
+    r_in.font.italic = True
+    r_in.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+
+    p_dept = doc.add_paragraph()
+    p_dept.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_dept.paragraph_format.space_before = Pt(0)
+    p_dept.paragraph_format.space_after = Pt(3)
+    r_dept = p_dept.add_run("Data Analytics")
+    r_dept.font.name = "Calibri"
+    r_dept.font.size = Pt(12)
+    r_dept.font.bold = True
+    r_dept.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
+
+    p_prog = doc.add_paragraph()
+    p_prog.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_prog.paragraph_format.space_before = Pt(0)
+    p_prog.paragraph_format.space_after = Pt(12)
+    r_prog = p_prog.add_run("Training Programme: HCLTech Career Shaper Programme")
+    r_prog.font.name = "Calibri"
+    r_prog.font.size = Pt(10)
+    r_prog.font.bold = True
+    r_prog.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30)
+
+    # 5. Submission Details Table
     cover_table = doc.add_table(rows=8, cols=2)
+    cover_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     cover_data = [
-        ("Project ID & Title", "CWMP-2026 - Channel Wise Marketing Performance Analysis"),
-        ("Domain", "Marketing Analytics & E-Commerce Telemetry"),
-        ("Programme / Batch", "MCA 2nd Year Data Analyst - ABES_OND26_MCA Batch 01"),
-        ("Learner(s) & Roll No(s)", "Vaishnavi Singh (Roll No: 2503201450157)"),
-        ("Mentor", "Prof. Kalpana Dwivedi, Department of Computer Applications"),
-        ("GitHub repository", "https://github.com/vaishnavi-singh-2503201450157/2503201450157-channel-wise-marketing-performance"),
-        ("Live app (Streamlit)", "https://2503201450157-channel-marketing.streamlit.app"),
-        ("Version & date", "v1.0 - 20/11/2026")
+        ("Submitted by:", "Vaishnavi Singh"),
+        ("University Roll Number:", "2500320140160"),
+        ("Batch ID:", "ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01"),
+        ("Project ID & Title:", "P084 : Channel Wise Marketing Performance Analysis"),
+        ("Project Mentor:", "Mr. Dinesh (Data Analytics)"),
+        ("Academic Session:", "2026–2027"),
+        ("Submission Date:", "21 November 2026"),
+        ("GitHub Repository:", "https://github.com/vaishnavisingh2717-bit/HCL-Training")
     ]
     for i, (k, v) in enumerate(cover_data):
         row = cover_table.rows[i]
         c0, c1 = row.cells[0], row.cells[1]
         c0.paragraphs[0].add_run(k)
         c1.paragraphs[0].add_run(v)
-    apply_table_specs(cover_table, [2900, 6738], header_bg="A51C30")
-    # In cover table, row 0 is standard data, let's reset header styling
+    apply_table_specs(cover_table, [3200, 6438], header_bg="A51C30")
     for cell in cover_table.rows[0].cells:
         set_cell_background(cell, "FFFFFF")
         for p in cell.paragraphs:
@@ -724,11 +814,11 @@ def generate_document():
     add_heading_1(doc, "Appendix A - Prompt to generate this document")
     add_label(doc, "MY PREFERENCES", color="A51C30")
     pref_lines = [
-        "PROJECT ID & TITLE: CWMP-2026 - Channel Wise Marketing Performance Analysis",
+        "PROJECT ID & TITLE: P084 - Channel Wise Marketing Performance Analysis",
         "DOMAIN: Marketing Analytics & E-Commerce Telemetry",
-        "LEARNER(S) & ROLL NO(S): Vaishnavi Singh | Roll No: 2503201450157",
-        "MENTOR: Prof. Kalpana Dwivedi, Department of Computer Applications",
-        "BATCH: MCA 2nd Year Data Analyst - ABES_OND26_MCA Batch 01",
+        "LEARNER(S) & ROLL NO(S): Vaishnavi Singh | Roll No: 2500320140160",
+        "MENTOR: Mr. Dinesh (Data Analytics)",
+        "BATCH: ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01",
         "INTENDED USERS: CMO, Performance Lead, Financial Controller, Growth Analyst, Operations Specialist",
         "PROBLEM IN MY WORDS: Ad spend across 5 digital channels suffers from lack of unified tracking, bleeding campaigns with low ROAS, and last-click attribution bias that undervalues top-of-funnel discovery channels.",
         "DATASET: Synthetic multi-channel dataset (seed 42) with 5 tables, 262 daily facts, 450 touchpoints, 150 customers, 25 campaigns, and a 38-column joined view in SQLite app.db.",
@@ -782,14 +872,6 @@ def generate_document():
 
     doc.save(TARGET_DOCX)
     print(f"Master project document saved to: {TARGET_DOCX}")
-
-    # Also mirror to CWMP_Project_Document.docx and 17_Project_Document.docx
-    p1 = os.path.join(DOCS_DIR, "CWMP_Project_Document.docx")
-    p2 = os.path.join(DOCS_DIR, "17_Project_Document.docx")
-    shutil.copyfile(TARGET_DOCX, p1)
-    shutil.copyfile(TARGET_DOCX, p2)
-    print(f"Mirrored copy saved to: {p1}")
-    print(f"Mirrored copy saved to: {p2}")
 
 if __name__ == "__main__":
     generate_document()
