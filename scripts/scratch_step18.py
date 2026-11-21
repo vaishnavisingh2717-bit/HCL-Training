@@ -220,7 +220,7 @@ def build_presentation():
     p0.space_before = Pt(4)
 
     p1 = tf_lines.add_paragraph()
-    p1.text = "Project ID: P084 | Mentor: Mr. Dinesh (Data Analytics)"
+    p1.text = "Project ID: P084 | Mentor: Mr. Dinesh"
     p1.font.name = "Calibri"
     p1.font.size = Pt(14)
     p1.font.color.rgb = COLOR_CARD

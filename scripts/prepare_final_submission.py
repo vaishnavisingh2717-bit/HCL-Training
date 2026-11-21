@@ -5,7 +5,7 @@ Roll No: 2500320140160
 Name: VaishnaviSingh
 Batch ID: ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01
 Project ID: P084
-Project Mentor: Mr. Dinesh (Data Analytics)
+Project Mentor: Mr. Dinesh
 """
 
 import os
@@ -89,7 +89,7 @@ def create_github_streamlit_details_doc():
     meta = [
         ("Learner Name & Roll No:", f"Vaishnavi Singh  |  Roll No: {ROLL_NO}"),
         ("Batch & Project ID:", "ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01  |  Project ID: P084"),
-        ("Project Mentor:", "Mr. Dinesh (Data Analytics)"),
+        ("Project Mentor:", "Mr. Dinesh"),
         ("Project Title:", "Channel Wise Marketing Performance Analysis (CWMP-2026)"),
         ("GitHub Repository URL:", "https://github.com/vaishnavisingh2717-bit/HCL-Training"),
         ("Live Streamlit App URL:", "https://2503201450157-channel-marketing.streamlit.app"),
@@ -243,7 +243,7 @@ def create_source_code_doc():
     p_meta.paragraph_format.space_after = Pt(12)
     p_meta.add_run(f"Project ID: P084 — Channel Wise Marketing Performance Analysis\n"
                    f"Learner: Vaishnavi Singh  |  Roll No: {ROLL_NO}  |  Batch: ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01\n"
-                   f"Mentor: Mr. Dinesh (Data Analytics)  |  Session: 2026–2027\n")
+                   f"Mentor: Mr. Dinesh  |  Session: 2026–2027\n")
 
     code_order = [
         ("app.py", "Master Entrypoint & Executive Overview Dashboard", ROOT_DIR / "app.py"),

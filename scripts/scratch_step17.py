@@ -357,7 +357,7 @@ def generate_document():
         ("University Roll Number:", "2500320140160"),
         ("Batch ID:", "ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01"),
         ("Project ID & Title:", "P084 : Channel Wise Marketing Performance Analysis"),
-        ("Project Mentor:", "Mr. Dinesh (Data Analytics)"),
+        ("Project Mentor:", "Mr. Dinesh"),
         ("Academic Session:", "2026–2027"),
         ("Submission Date:", "21 November 2026"),
         ("GitHub Repository:", "https://github.com/vaishnavisingh2717-bit/HCL-Training")
@@ -817,7 +817,7 @@ def generate_document():
         "PROJECT ID & TITLE: P084 - Channel Wise Marketing Performance Analysis",
         "DOMAIN: Marketing Analytics & E-Commerce Telemetry",
         "LEARNER(S) & ROLL NO(S): Vaishnavi Singh | Roll No: 2500320140160",
-        "MENTOR: Mr. Dinesh (Data Analytics)",
+        "MENTOR: Mr. Dinesh",
         "BATCH: ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01",
         "INTENDED USERS: CMO, Performance Lead, Financial Controller, Growth Analyst, Operations Specialist",
         "PROBLEM IN MY WORDS: Ad spend across 5 digital channels suffers from lack of unified tracking, bleeding campaigns with low ROAS, and last-click attribution bias that undervalues top-of-funnel discovery channels.",

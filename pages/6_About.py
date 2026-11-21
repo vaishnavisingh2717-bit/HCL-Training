@@ -52,7 +52,7 @@ def main():
 
     with col2:
         st.markdown("""
-        **Project Mentor:** Mr. Dinesh (Data Analytics)  
+        **Project Mentor:** Mr. Dinesh  
         **Department:** Department of Computer Applications  
         **Project Title:** Channel Wise Marketing Performance Analysis (P084)  
         **Technology Stack:** Python 3.12, Streamlit Multipage, SQLite 3, Plotly, Tailwind CSS, Pytest  
