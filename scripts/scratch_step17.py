@@ -293,15 +293,14 @@ def generate_document():
     p_toc.paragraph_format.space_before = Pt(0)
     p_toc.paragraph_format.space_after = Pt(0)
     
-    # Pre-render the 10 Heading 1 titles inside the TOC field
+    # Pre-render the Heading 1 titles inside the valid TOC run elements
+    r_begin = p_toc.add_run()
     fldCharBegin = parse_xml(r'<w:fldChar %s w:fldCharType="begin"/>' % nsdecls('w'))
     instr = parse_xml(r'<w:instrText %s xml:space="preserve"> TOC \h \o "1-1" </w:instrText>' % nsdecls('w'))
     fldCharSeparate = parse_xml(r'<w:fldChar %s w:fldCharType="separate"/>' % nsdecls('w'))
-    fldCharEnd = parse_xml(r'<w:fldChar %s w:fldCharType="end"/>' % nsdecls('w'))
-    
-    p_toc._p.append(fldCharBegin)
-    p_toc._p.append(instr)
-    p_toc._p.append(fldCharSeparate)
+    r_begin._r.append(fldCharBegin)
+    r_begin._r.append(instr)
+    r_begin._r.append(fldCharSeparate)
 
     toc_titles = [
         "1. Project Description",
@@ -327,7 +326,9 @@ def generate_document():
         r_t.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
     p_end = doc.add_paragraph()
-    p_end._p.append(fldCharEnd)
+    r_end = p_end.add_run()
+    fldCharEnd = parse_xml(r'<w:fldChar %s w:fldCharType="end"/>' % nsdecls('w'))
+    r_end._r.append(fldCharEnd)
 
     doc.add_page_break()
 

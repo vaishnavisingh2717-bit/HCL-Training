@@ -12,3 +12,7 @@ __pycache__/
 
 # Streamlit Local Secrets & Runtime
 .streamlit/secrets.toml
+
+# LMS Upload Packages & Archives
+LMS_Upload_Package/
+*.zip
