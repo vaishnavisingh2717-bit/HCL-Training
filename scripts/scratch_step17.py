@@ -183,8 +183,9 @@ def generate_document():
         section.right_margin = Inches(2.0 / 2.54)
         section.header_distance = Inches(1.25 / 2.54)
         section.footer_distance = Inches(1.25 / 2.54)
+        section.different_first_page_header_footer = True
 
-        # Header: every page, right, 8 pt 7F7F7F: ABES Engineering College | Project Document | <Project ID>
+        # Header for subsequent pages: right, 8 pt 7F7F7F: ABES Engineering College | Project Report | <Project ID>
         header = section.header
         header_p = header.paragraphs[0]
         header_p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
@@ -195,7 +196,7 @@ def generate_document():
         header_run.font.size = Pt(8)
         header_run.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
 
-        # Footer: every page, centre, 8 pt 7F7F7F: <Learner> | <Roll No>     Page <live PAGE field>
+        # Footer for subsequent pages: centre, 8 pt 7F7F7F: <Learner> | <Roll No>     Page <live PAGE field>
         footer = section.footer
         footer_p = footer.paragraphs[0]
         footer_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -207,6 +208,14 @@ def generate_document():
         footer_run1.font.color.rgb = RGBColor(0x7F, 0x7F, 0x7F)
         add_page_number(footer_run1)
 
+        # Clean First Page (Cover) - No header or footer
+        first_h = section.first_page_header
+        first_h.is_linked_to_previous = False
+        first_h.paragraphs[0].text = ""
+        first_f = section.first_page_footer
+        first_f.is_linked_to_previous = False
+        first_f.paragraphs[0].text = ""
+
     # Base styles
     styles = doc.styles
     normal_style = styles['Normal']
@@ -217,22 +226,22 @@ def generate_document():
     normal_style.paragraph_format.space_before = Pt(0)
     normal_style.paragraph_format.space_after = Pt(0)
 
-    # ==================== PAGE 1 COVER (Exact Format from Image) ====================
-    # 1. College Logo
+    # ==================== PAGE 1 COVER (Exact Format from User Photo) ====================
+    # 1. College Logo (Top Center)
     logo_path = os.path.join(DOCS_DIR, "abes_logo.jpg")
     if os.path.exists(logo_path):
         p_logo = doc.add_paragraph()
         p_logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p_logo.paragraph_format.space_before = Pt(0)
-        p_logo.paragraph_format.space_after = Pt(2)
+        p_logo.paragraph_format.space_before = Pt(6)
+        p_logo.paragraph_format.space_after = Pt(4)
         r_pic = p_logo.add_run()
-        r_pic.add_picture(logo_path, width=Inches(1.15))
+        r_pic.add_picture(logo_path, width=Inches(1.2))
 
     # 2. Institution Details
     p_inst = doc.add_paragraph()
     p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_inst.paragraph_format.space_before = Pt(2)
-    p_inst.paragraph_format.space_after = Pt(1)
+    p_inst.paragraph_format.space_after = Pt(2)
     r_inst = p_inst.add_run("ABES ENGINEERING COLLEGE")
     r_inst.font.name = "Georgia"
     r_inst.font.size = Pt(15)
@@ -242,27 +251,27 @@ def generate_document():
     p_city = doc.add_paragraph()
     p_city.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_city.paragraph_format.space_before = Pt(0)
-    p_city.paragraph_format.space_after = Pt(1)
+    p_city.paragraph_format.space_after = Pt(2)
     r_city = p_city.add_run("Ghaziabad, Uttar Pradesh")
     r_city.font.name = "Calibri"
-    r_city.font.size = Pt(10.5)
+    r_city.font.size = Pt(11)
     r_city.font.bold = True
     r_city.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
 
     p_aff = doc.add_paragraph()
     p_aff.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_aff.paragraph_format.space_before = Pt(0)
-    p_aff.paragraph_format.space_after = Pt(12)
+    p_aff.paragraph_format.space_after = Pt(18)
     r_aff = p_aff.add_run("Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Uttar Pradesh")
     r_aff.font.name = "Calibri"
-    r_aff.font.size = Pt(9.0)
-    r_aff.font.color.rgb = RGBColor(0x66, 0x66, 0x66)
+    r_aff.font.size = Pt(9.5)
+    r_aff.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
 
     # 3. Report Title
     p_rep = doc.add_paragraph()
     p_rep.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_rep.paragraph_format.space_before = Pt(4)
-    p_rep.paragraph_format.space_after = Pt(2)
+    p_rep.paragraph_format.space_after = Pt(3)
     r_rep = p_rep.add_run("PROJECT REPORT")
     r_rep.font.name = "Georgia"
     r_rep.font.size = Pt(20)
@@ -272,7 +281,7 @@ def generate_document():
     p_on = doc.add_paragraph()
     p_on.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_on.paragraph_format.space_before = Pt(0)
-    p_on.paragraph_format.space_after = Pt(2)
+    p_on.paragraph_format.space_after = Pt(3)
     r_on = p_on.add_run("on")
     r_on.font.name = "Calibri"
     r_on.font.size = Pt(11)
@@ -282,57 +291,56 @@ def generate_document():
     p_proj = doc.add_paragraph()
     p_proj.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_proj.paragraph_format.space_before = Pt(0)
-    p_proj.paragraph_format.space_after = Pt(2)
+    p_proj.paragraph_format.space_after = Pt(3)
     r_proj = p_proj.add_run("Channel Wise Marketing Performance Analysis")
     r_proj.font.name = "Georgia"
     r_proj.font.size = Pt(16)
     r_proj.font.bold = True
-    r_proj.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30) # Burgundy
+    r_proj.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
-    p_pid = doc.add_paragraph()
-    p_pid.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_pid.paragraph_format.space_before = Pt(0)
-    p_pid.paragraph_format.space_after = Pt(12)
-    r_pid = p_pid.add_run("Project ID: P084  |  A Multi-Touch Telemetry & Capital Attribution System")
-    r_pid.font.name = "Calibri"
-    r_pid.font.size = Pt(9.5)
-    r_pid.font.bold = True
-    r_pid.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    p_subdesc = doc.add_paragraph()
+    p_subdesc.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_subdesc.paragraph_format.space_before = Pt(0)
+    p_subdesc.paragraph_format.space_after = Pt(20)
+    r_subdesc = p_subdesc.add_run("A Retail Customer & Cross-Channel Performance Analytics System")
+    r_subdesc.font.name = "Calibri"
+    r_subdesc.font.size = Pt(11)
+    r_subdesc.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
 
     # 4. Fulfilment Text
     p_subm = doc.add_paragraph()
     p_subm.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_subm.paragraph_format.space_before = Pt(2)
-    p_subm.paragraph_format.space_after = Pt(2)
+    p_subm.paragraph_format.space_before = Pt(0)
+    p_subm.paragraph_format.space_after = Pt(3)
     r_subm = p_subm.add_run("Submitted in partial fulfilment of the requirements for the degree of")
     r_subm.font.name = "Calibri"
-    r_subm.font.size = Pt(10)
-    r_subm.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
+    r_subm.font.size = Pt(10.5)
+    r_subm.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
 
     p_deg = doc.add_paragraph()
     p_deg.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_deg.paragraph_format.space_before = Pt(0)
-    p_deg.paragraph_format.space_after = Pt(1)
+    p_deg.paragraph_format.space_after = Pt(2)
     r_deg = p_deg.add_run("Master of Computer Applications")
     r_deg.font.name = "Calibri"
-    r_deg.font.size = Pt(12.5)
+    r_deg.font.size = Pt(13)
     r_deg.font.bold = True
     r_deg.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
     p_in = doc.add_paragraph()
     p_in.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_in.paragraph_format.space_before = Pt(0)
-    p_in.paragraph_format.space_after = Pt(1)
+    p_in.paragraph_format.space_after = Pt(2)
     r_in = p_in.add_run("in")
     r_in.font.name = "Calibri"
-    r_in.font.size = Pt(10)
+    r_in.font.size = Pt(10.5)
     r_in.font.italic = True
     r_in.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
 
     p_dept = doc.add_paragraph()
     p_dept.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_dept.paragraph_format.space_before = Pt(0)
-    p_dept.paragraph_format.space_after = Pt(3)
+    p_dept.paragraph_format.space_after = Pt(6)
     r_dept = p_dept.add_run("Data Analytics")
     r_dept.font.name = "Calibri"
     r_dept.font.size = Pt(12)
@@ -342,38 +350,54 @@ def generate_document():
     p_prog = doc.add_paragraph()
     p_prog.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_prog.paragraph_format.space_before = Pt(0)
-    p_prog.paragraph_format.space_after = Pt(12)
+    p_prog.paragraph_format.space_after = Pt(22)
     r_prog = p_prog.add_run("Training Programme: HCLTech Career Shaper Programme")
     r_prog.font.name = "Calibri"
-    r_prog.font.size = Pt(10)
-    r_prog.font.bold = True
-    r_prog.font.color.rgb = RGBColor(0xA5, 0x1C, 0x30)
+    r_prog.font.size = Pt(10.5)
+    r_prog.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
 
-    # 5. Submission Details Table
-    cover_table = doc.add_table(rows=8, cols=2)
+    # 5. Submission Details Block (Matching Photo Exactly - Clean, Borderless)
+    cover_table = doc.add_table(rows=6, cols=2)
     cover_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     cover_data = [
         ("Submitted by:", "Vaishnavi Singh"),
         ("University Roll Number:", "2500320140160"),
-        ("Batch ID:", "ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01"),
-        ("Project ID & Title:", "P084 : Channel Wise Marketing Performance Analysis"),
-        ("Project Mentor:", "Mr. Dinesh"),
+        ("Project Guide:", "Mr. Dinesh"),
+        ("Project ID / Batch:", "P084  |  ABES_OND26_MCA 2nd Year_Data Analytics_Batch 01"),
         ("Academic Session:", "2026–2027"),
-        ("Submission Date:", "21 November 2026"),
-        ("GitHub Repository:", "https://github.com/vaishnavisingh2717-bit/HCL-Training")
+        ("Submission Date:", "21 November 2026")
     ]
     for i, (k, v) in enumerate(cover_data):
         row = cover_table.rows[i]
         c0, c1 = row.cells[0], row.cells[1]
-        c0.paragraphs[0].add_run(k)
-        c1.paragraphs[0].add_run(v)
-    apply_table_specs(cover_table, [3200, 6438], header_bg="A51C30")
-    for cell in cover_table.rows[0].cells:
-        set_cell_background(cell, "FFFFFF")
-        for p in cell.paragraphs:
-            for r in p.runs:
-                r.font.bold = (cell == cover_table.rows[0].cells[0])
-                r.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
+        c0.width = Inches(2.6)
+        c1.width = Inches(4.3)
+        
+        # Borderless cells
+        tcPr0 = c0._tc.get_or_add_tcPr()
+        tcPr0.append(parse_xml(f'<w:tcBorders {nsdecls("w")}><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/></w:tcBorders>'))
+        tcPr1 = c1._tc.get_or_add_tcPr()
+        tcPr1.append(parse_xml(f'<w:tcBorders {nsdecls("w")}><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/></w:tcBorders>'))
+
+        set_cell_margins(c0, 40, 40, 60, 60)
+        set_cell_margins(c1, 40, 40, 60, 60)
+
+        p0 = c0.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(2)
+        p0.paragraph_format.space_after = Pt(2)
+        r0 = p0.add_run(k)
+        r0.font.name = "Calibri"
+        r0.font.size = Pt(10.5)
+        r0.font.bold = True
+        r0.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
+
+        p1 = c1.paragraphs[0]
+        p1.paragraph_format.space_before = Pt(2)
+        p1.paragraph_format.space_after = Pt(2)
+        r1 = p1.add_run(v)
+        r1.font.name = "Calibri"
+        r1.font.size = Pt(10.5)
+        r1.font.color.rgb = RGBColor(0x15, 0x15, 0x14)
 
     doc.add_page_break()
 
