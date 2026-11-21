@@ -15,4 +15,5 @@ __pycache__/
 
 # LMS Upload Packages & Archives
 LMS_Upload_Package/
+final submission/
 *.zip
